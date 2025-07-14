@@ -1,1 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Zoe Web Assistant</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../static/index.css">
+</head>
+<body>
+    <div class="theme-toggle-container">
+    <label class="theme-toggle-label">
+        <input type="checkbox" id="themeToggle">
+        <span class="toggle-slider"></span>
+        🌙 Dark Mode
+    </label>
+    </div>
 
+
+    <h2>🌐 Zoe Web Assistant</h2>
+
+    <!-- SECTION 1: Input Type Selection -->
+    <section class="section input-section">
+    <h3>Input</h3>  <!-- Added header -->
+    <div class="input-mode-buttons">
+        <label class="input-mode-option active">
+            <input type="radio" name="inputType" value="url" checked hidden />
+            🌐 URL
+        </label>
+        <label class="input-mode-option">
+            <input type="radio" name="inputType" value="raw" hidden />
+            📝 Raw HTML/Text
+        </label>
+    </div>
+
+    <div id="urlInputWrapper" class="input-wrapper">
+        <input id="url" type="text" placeholder="Paste URL (Amazon, OLX, article...)" />
+    </div>
+
+    <div id="rawHtmlWrapper" class="input-wrapper" style="display: none;">
+        <textarea id="rawHtml" rows="6" placeholder="Paste raw HTML or text here..."></textarea>
+
+        <div id="drop-zone" class="drop-zone">
+            Drag & Drop HTML file here or <label for="fileInput" class="file-input-label">Choose File</label>
+            <input type="file" id="fileInput" accept=".html" />
+        </div>
+    </div>
+    </section>
+
+    <!-- SECTION 2: Prompt -->
+    <section class="section prompt-section">
+    <h3>Prompt</h3>  <!-- Added header -->
+    <input list="instruction-options" id="instruction" placeholder="Type your instruction..." autocomplete="off" />
+    <div class="quick-prompts">
+        <strong class="quick-prompts-label">💡 Quick Prompts:</strong>
+        <div class="quick-prompts-buttons">
+        <button type="button" onclick="setInstruction('Summarize this page')">Summarize</button>
+        <button type="button" onclick="setInstruction('Write a detailed product description')">Product Description</button>
+        <button type="button" onclick="setInstruction('Write an SEO-optimized product listing')">SEO Listing</button>
+        <button type="button" onclick="setInstruction('Turn this into an OLX/Facebook Marketplace listing')">OLX/FB Listing</button>
+        <button type="button" onclick="setInstruction('Write a persuasive email copy')">Generate Email Copy</button>
+        <button type="button" onclick="setInstruction('Create a catchy social media post')">Create Social Media Post</button>
+        </div>
+    </div>
+    </section>
+
+    <!-- SECTION 3: Model Selection and Output -->
+    <section class="section model-output-section">
+    <h3>Model & Output</h3>  <!-- Added header -->
+    <select id="model" onchange="updateModelDescription()">
+        <option value="nous-hermes">Nous Hermes</option>
+        <option value="mistral">Mistral</option>
+        <option value="llama3">LLaMA 3</option>
+        <option value="openhermes">OpenHermes</option>
+    </select>
+    <div id="model-description" style="margin-top: 1em; font-style: italic; color: #555;"></div>
+
+    <button onclick="submitData()">Submit</button>
+
+    <textarea id="output" rows="10" placeholder="Output will appear here..."></textarea>
+
+    <div class="action-buttons">
+        <button onclick="copyToClipboard()">📋 Copy</button>
+        <button onclick="downloadOutput()">💾 Download</button>
+    </div>
+    </section>
+
+
+    <script src="../static/index.js"></script>
+</body>
+</html>
